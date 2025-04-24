@@ -1,0 +1,8 @@
+<h2>Movie List</h2>
+<ul>
+  @for (movie of movies(); track movie.id) {
+  <li>
+    <strong>{{ movie.title }}</strong> - {{ movie.director }} {{ movie.year }}
+  </li>
+  }
+</ul>
