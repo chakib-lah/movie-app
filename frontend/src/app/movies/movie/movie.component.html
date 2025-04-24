@@ -1,8 +1,13 @@
 <h2>Movie List</h2>
-<ul>
+<mat-list>
   @for (movie of movies(); track movie.id) {
-  <li>
-    <strong>{{ movie.title }}</strong> - {{ movie.director }} {{ movie.year }}
-  </li>
+  <mat-list-item>
+    <mat-card style="width: 100%;">
+      <mat-card-title>{{ movie.title }}</mat-card-title>
+      <mat-card-subtitle>
+        {{ movie.director }} {{ movie.year }}
+      </mat-card-subtitle>
+    </mat-card>
+  </mat-list-item>
   }
-</ul>
+</mat-list>
