@@ -1,8 +1,9 @@
-import { Component, signal } from '@angular/core';
-import { MOVIES } from '../movie.data';
+import { Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { RouterLink } from '@angular/router';
+
+import { MovieService } from '../movie.service';
 
 @Component({
   selector: 'app-movie',
@@ -11,5 +12,6 @@ import { RouterLink } from '@angular/router';
   styleUrl: './movie.component.css',
 })
 export class MovieComponent {
-  movies = signal(MOVIES);
+  private movieService = inject(MovieService);
+  movies = this.movieService.allMovies();
 }

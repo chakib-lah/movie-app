@@ -1,6 +1,6 @@
 <h2>Movie List</h2>
 <mat-list>
-  @for (movie of movies(); track movie.id) {
+  @for (movie of movies; track movie.id) {
   <mat-list-item class="movie-list-item" disableRipple>
     <mat-card
       class="movie-card mat-elevation-z2"
