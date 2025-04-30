@@ -1,13 +1,18 @@
 import express from "express";
+import dotenv from 'dotenv';
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 
 import movieRoutes from "./routes/movies";
+import authRoutes from "./routes/auth";
+
+dotenv.config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 mongoose
-  .connect("mongodb://localhost:27017/movie-app")
+  .connect(process.env.MONGO_URI!)
   .then(() => {
     console.log("✅ Connected to MongoDB");
     app.listen(port, () => {
@@ -20,6 +25,9 @@ mongoose
 
 app.use(express.json());
 
+app.use(cookieParser());
+
+app.use("/api/auth", authRoutes);
 app.use("/api/movies", movieRoutes);
 
 // app.listen(port, () => {

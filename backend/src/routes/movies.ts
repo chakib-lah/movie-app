@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { Movie } from "../models/movie.model";
+import { authenticate } from "../middleware/auth";
 
 const router = Router();
 
@@ -10,7 +11,7 @@ const router = Router();
 // ];
 
 // GET /api/movies -> List all movies
-router.get("/", async (req, res) => {
+router.get("/", authenticate, async (req, res) => {
   const movies = await Movie.find();
   res.json(movies);
 });
