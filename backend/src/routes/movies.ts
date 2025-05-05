@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { Movie } from "../models/movie.model";
 import { authenticate } from "../middleware/auth";
+import { movieSchema } from "../validators/movie.validator";
 
 const router = Router();
 
@@ -26,12 +27,19 @@ router.get("/:movieId", async (req, res) => {
 });
 
 // POST /api/movies -> Add a new movie
-router.post("/", async (req, res) => {
-  const { title, director, year } = req.body;
-  const newMovie = new Movie({ title, director, year });
-  await newMovie.save();
-  //   movies.push(newMovie);
-  res.status(201).json(newMovie);
+router.post("/", async (req, res, next) => {
+  try {
+    const validated = movieSchema.parse(req.body);
+    console.log(validated);
+    const newMovie = new Movie(validated);
+    // const { title, director, year } = req.body;
+    // const newMovie = new Movie({ title, director, year });
+    await newMovie.save();
+    //   movies.push(newMovie);
+    res.status(201).json(newMovie);
+  } catch (error) {
+    next(error);
+  }
 });
 
 // PUT /api/movies/:id -> Update a movie
