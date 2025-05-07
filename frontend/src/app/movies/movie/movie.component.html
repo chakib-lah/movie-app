@@ -1,19 +1,24 @@
 <h2>Movie List</h2>
-<mat-list>
-  @for (movie of movies; track movie.id) {
-  <mat-list-item class="movie-list-item" disableRipple>
-    <mat-card
-      class="movie-card mat-elevation-z2"
-      [routerLink]="['/movies', movie.id]"
-      matRipple
-    >
-      <mat-card-content>
-        <mat-card-title>{{ movie.title }}</mat-card-title>
-        <mat-card-subtitle>
-          {{ movie.director }} {{ movie.year }}
-        </mat-card-subtitle>
-      </mat-card-content>
-    </mat-card>
-  </mat-list-item>
+
+@if (isFetching()) {
+<p class="fallback-text">Fetching movies...</p>
+} @else { @if (hasMovies()) {
+<div class="movie-grid">
+  @for (movie of movies(); track movie.id) {
+  <mat-card
+    class="movie-card mat-elevation-z2"
+    [routerLink]="['/movies', movie.id]"
+    matRipple
+  >
+    <mat-card-content>
+      <mat-card-title>{{ movie.title }}</mat-card-title>
+      <mat-card-subtitle>
+        {{ movie.director }} {{ movie.year }}
+      </mat-card-subtitle>
+    </mat-card-content>
+  </mat-card>
   }
-</mat-list>
+</div>
+} @else {
+<p class="fallback-text">Unfortunately, no movies could be found.</p>
+} }

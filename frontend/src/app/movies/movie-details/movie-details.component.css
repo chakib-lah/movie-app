@@ -1,30 +1,37 @@
 .movie-detail-card {
   max-width: 600px;
-  margin: 3rem auto;
-  padding: 1rem;
+  margin: 4rem auto;
+  padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  background-color: #fafafa;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 mat-card-title {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 600;
   color: #3f51b5;
 }
 
 mat-card-subtitle {
   font-size: 1rem;
-  color: #777;
+  color: #666;
 }
 
 mat-card-content p {
   font-size: 1rem;
   color: #444;
   margin-top: 1rem;
+  line-height: 1.6;
 }
 
 mat-card-actions {
   margin-top: 2rem;
-  display: flex;
-  justify-content: flex-start;
+}
+
+button[mat-stroked-button] {
+  text-transform: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.5rem 1.25rem;
 }
