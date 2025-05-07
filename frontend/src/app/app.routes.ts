@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegistreComponent } from './auth/registre/registre.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +25,14 @@ export const routes: Routes = [
         component: MovieDetailsComponent,
       }
     ],
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegistreComponent
   },
   {
     path: '**',

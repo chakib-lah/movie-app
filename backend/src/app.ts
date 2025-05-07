@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 import movieRoutes from "./routes/movies";
 import authRoutes from "./routes/auth";
@@ -24,6 +25,13 @@ mongoose
   .catch((err) => {
     console.error("❌ MongoDB connection error:", err);
   });
+
+app.use(
+  cors({
+    origin: process.env.FRONT_URI,
+    credentials: true,
+  })
+);
 
 // Middleware for parsing
 app.use(express.json());

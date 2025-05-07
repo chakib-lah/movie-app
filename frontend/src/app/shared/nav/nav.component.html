@@ -1,3 +1,20 @@
 <header>
-  <mat-toolbar color="primary" [routerLink]="['/']"> My Movie App </mat-toolbar>
+  <mat-toolbar color="primary">
+    <!-- App Logo / Home Link -->
+    <span class="logo" routerLink="/" style="cursor: pointer">
+      My Movie App
+    </span>
+
+    <span class="spacer"></span>
+
+    <!-- Auth Links -->
+    @if (!isLoggedIn()) {
+    <div class="auth-links">
+      <a mat-button routerLink="/login">Login</a>
+      <a mat-button routerLink="/register">Register</a>
+    </div>
+    } @else {
+    <button mat-stroked-button color="warn" (click)="onLogout()">Logout</button>
+    }
+  </mat-toolbar>
 </header>
