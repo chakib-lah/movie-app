@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
-import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegistreComponent } from './auth/registre/registre.component';
+import { authGuard } from './core/services/auth.guard';
+import { guestGuard } from './core/services/guest.guard';
 
 export const routes: Routes = [
   {
@@ -15,27 +16,24 @@ export const routes: Routes = [
       },
       {
         path: 'movies',
-        loadComponent: () =>
-          import('./movies/movie/movie.component').then(
-            (mod) => mod.MovieComponent
-          ),
+        canActivate: [authGuard],
+        loadChildren: () =>
+          import('./movies/movies.routes').then((m) => m.movieRoutes),
       },
-      {
-        path: 'movies/:movieId',
-        component: MovieDetailsComponent,
-      }
     ],
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [guestGuard],
   },
   {
     path: 'register',
-    component: RegistreComponent
+    component: RegistreComponent,
+    canActivate: [guestGuard],
   },
   {
     path: '**',
-    component: NotFoundComponent
-  }
+    component: NotFoundComponent,
+  },
 ];
