@@ -69,7 +69,6 @@ export class RegistreComponent {
 
     const { email, passwords } = this.form.getRawValue();
     const password = passwords?.password;
-    console.log(passwords);
 
     if (!email || !password) return;
 

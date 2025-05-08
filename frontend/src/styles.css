@@ -14,3 +14,9 @@ body {
   color: #fff;
   font-weight: 500;
 }
+
+.warn-snackbar {
+  background-color: #e53935;
+  color: white;
+  font-weight: bold;
+}

@@ -9,7 +9,6 @@ export class ErrorService {
   error = this._error.asReadonly();
 
   showError(message: string): void {
-    console.log(message);
     this._error.set(message);
     this.snackBar.open(message, 'Close', {
       duration: 3000,
@@ -19,5 +18,12 @@ export class ErrorService {
 
   clearError() {
     this._error.set('');
+  }
+
+  showLogoutMessage(message: string) {
+    this.snackBar.open(message, 'OK', {
+      duration: 4000,
+      panelClass: ['warn-snackbar'], // optional styling
+    });
   }
 }

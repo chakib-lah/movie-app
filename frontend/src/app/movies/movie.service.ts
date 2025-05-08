@@ -24,7 +24,6 @@ export class MovieService {
   }
 
   getMovieById(id: string) {
-    console.log(id);
     return this.http
       .get<Movie>(`${this.baseUrl}/${id}`)
       .pipe(

@@ -18,7 +18,7 @@ router.get("/", authenticate, async (req, res) => {
 });
 
 // GET /api/movies/:id -> Get one movie by ID
-router.get("/:movieId", async (req, res) => {
+router.get("/:movieId", authenticate, async (req, res) => {
   const movieId = req.params.movieId;
   //   const movie = movies.find((m) => m.id === movieId);
   const movie = await Movie.findById(movieId);
@@ -27,7 +27,7 @@ router.get("/:movieId", async (req, res) => {
 });
 
 // POST /api/movies -> Add a new movie
-router.post("/", async (req, res, next) => {
+router.post("/", authenticate, async (req, res, next) => {
   try {
     const validated = movieSchema.parse(req.body);
     console.log(validated);
@@ -43,7 +43,7 @@ router.post("/", async (req, res, next) => {
 });
 
 // PUT /api/movies/:id -> Update a movie
-router.put("/:movieId", async (req, res) => {
+router.put("/:movieId", authenticate, async (req, res) => {
   const movieId = req.params.movieId;
   //   const index = movies.findIndex((m) => m.id === movieId);
   const updated = await Movie.findByIdAndUpdate(movieId, req.body, {
@@ -59,7 +59,7 @@ router.put("/:movieId", async (req, res) => {
 });
 
 // DELETE /api/movies/:id -> Delete a movie
-router.delete("/:movieId", async (req, res) => {
+router.delete("/:movieId", authenticate, async (req, res) => {
   const movieId = req.params.movieId;
   const deleted = await Movie.findByIdAndDelete(movieId);
   if (!deleted) return res.status(404).json({ message: "Movie not found" });
