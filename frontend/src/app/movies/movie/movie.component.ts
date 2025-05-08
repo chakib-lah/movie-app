@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { RouterLink } from '@angular/router';
@@ -16,6 +16,7 @@ import { ErrorService } from '../../core/services/error.service';
 export class MovieComponent implements OnInit {
   private movieService = inject(MovieService);
   private errorService = inject(ErrorService);
+  private destroyRef = inject(DestroyRef);
 
   isFetching = signal(false);
   movies = signal<Movie[] | null>(null);
@@ -25,7 +26,6 @@ export class MovieComponent implements OnInit {
   ngOnInit(): void {
     const subscrption = this.movieService.getAllMovies().subscribe({
       next: (movies) => {
-        console.log(movies);
         this.movies.set(movies);
       },
       error: (error) => {
@@ -34,6 +34,10 @@ export class MovieComponent implements OnInit {
       complete: () => {
         this.isFetching.set(false);
       },
+    });
+
+    this.destroyRef.onDestroy(() => {
+      subscrption.unsubscribe();
     });
   }
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { switchMap, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +14,10 @@ export class AuthService {
   readonly isLoggedIn = this._isLoggedIn.asReadonly();
 
   login(credentials: { email: string; password: string }) {
-    console.log(credentials);
     return this.http.post<{ accessToken: string }>(
       `${environment.apiUrl}/auth/login`,
-      credentials
+      credentials,
+      { withCredentials: true }
     );
   }
 
@@ -34,9 +35,28 @@ export class AuthService {
     return this.token() || localStorage.getItem('accessToken');
   }
 
+  refreshToken() {
+    return this.http
+      .post<{ accessToken: string }>(
+        `${environment.apiUrl}/auth/refresh`,
+        {},
+        { withCredentials: true }
+      )
+      .pipe(
+        tap(({ accessToken }) => {
+          this.setToken(accessToken);
+        })
+      );
+  }
+
   logout() {
     this.token.set(null);
     localStorage.removeItem('accessToken');
     this._isLoggedIn.set(false);
+    return this.http.post(
+      `${environment.apiUrl}/auth/logout`,
+      {},
+      { withCredentials: true }
+    );
   }
 }

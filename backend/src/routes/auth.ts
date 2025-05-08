@@ -8,6 +8,8 @@ const router = Router();
 const ACCESS_SECRET = process.env.ACCESS_SECRET || "fallbackAccessSecret";
 const REFRESH_SECRET = process.env.REFRESH_SECRET || "fallbackRefreshSecret";
 
+const isProduction = process.env.NODE_ENV === "production";
+
 // Register
 router.post("/register", async (req, res, next) => {
   try {
@@ -27,7 +29,7 @@ router.post("/register", async (req, res, next) => {
 });
 
 const generateAccessToken = (userId: string) => {
-  return jwt.sign({ userId }, ACCESS_SECRET, { expiresIn: "15m" });
+  return jwt.sign({ userId }, ACCESS_SECRET, { expiresIn: "1m" });
 };
 
 const generateRefreshToken = (userId: string) => {
@@ -51,8 +53,7 @@ router.post("/login", async (req, res, next) => {
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: false, // set to true in production (HTTPS)
-      path: "/api/auth/refresh",
+      secure: isProduction, // set to true in production (HTTPS)
       sameSite: "strict",
     });
 
@@ -69,16 +70,26 @@ router.post("/refresh", (req, res) => {
 
   try {
     const payload = jwt.verify(token, REFRESH_SECRET) as { userId: string };
-    const accessToken = generateAccessToken(payload.userId);
-    res.json({ accessToken });
-  } catch {
+    const newAccessToken = generateAccessToken(payload.userId);
+    const newRefreshToken = generateRefreshToken(payload.userId);
+
+    res.cookie("refreshToken", newRefreshToken, {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: "strict",
+    });
+
+    res.json({ accessToken: newAccessToken });
+  } catch (err) {
+    console.error("Refresh token error:", err);
+    res.clearCookie("refreshToken", { path: "/api/auth/refresh" });
     res.status(403).json({ message: "Invalid refresh token" });
   }
 });
 
 //Logout
 router.post("/logout", (req, res) => {
-  res.clearCookie("refreshToken", { path: "/api/auth/refresh" });
+  res.clearCookie("refreshToken");
   return res.json({ message: "Logged out" });
 });
 
