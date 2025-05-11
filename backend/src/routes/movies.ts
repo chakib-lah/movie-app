@@ -30,7 +30,6 @@ router.get("/:movieId", authenticate, async (req, res) => {
 router.post("/", authenticate, async (req, res, next) => {
   try {
     const validated = movieSchema.parse(req.body);
-    console.log(validated);
     const newMovie = new Movie(validated);
     // const { title, director, year } = req.body;
     // const newMovie = new Movie({ title, director, year });
