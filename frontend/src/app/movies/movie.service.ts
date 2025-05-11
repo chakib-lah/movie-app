@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { catchError, map, throwError } from 'rxjs';
 import { ErrorService } from '../core/services/error.service';
-import { Movie } from './movie.model';
+import { Movie, NewMovie } from './movie.model';
 
 @Injectable({ providedIn: 'root' })
 export class MovieService {
@@ -33,7 +33,7 @@ export class MovieService {
       );
   }
 
-  addMovie(movie: Movie) {
+  addMovie(movie: NewMovie) {
     return this.http
       .post<Movie>(this.baseUrl, movie)
       .pipe(
@@ -45,7 +45,7 @@ export class MovieService {
 
   updateMovie(movie: Movie) {
     return this.http
-      .put(`${this.baseUrl}/${movie.id}`, movie)
+      .put(`${this.baseUrl}/${movie._id}`, movie)
       .pipe(
         catchError((error) =>
           this.handleError(error, 'Failed to update movie.')
@@ -53,9 +53,9 @@ export class MovieService {
       );
   }
 
-  removeMovie(movie: Movie) {
+  removeMovie(id: string) {
     return this.http
-      .delete(`${this.baseUrl}/${movie.id}`)
+      .delete(`${this.baseUrl}/${id}`)
       .pipe(
         catchError((error) =>
           this.handleError(error, 'Failed to remove movie.')

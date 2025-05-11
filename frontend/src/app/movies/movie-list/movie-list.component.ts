@@ -1,4 +1,11 @@
-import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { RouterLink } from '@angular/router';
@@ -6,14 +13,15 @@ import { RouterLink } from '@angular/router';
 import { MovieService } from '../movie.service';
 import { Movie } from '../movie.model';
 import { ErrorService } from '../../core/services/error.service';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-movie',
-  imports: [MatCardModule, MatListModule, RouterLink],
-  templateUrl: './movie.component.html',
-  styleUrl: './movie.component.css',
+  imports: [RouterLink, MatCardModule, MatListModule, MatButton],
+  templateUrl: './movie-list.component.html',
+  styleUrl: './movie-list.component.css',
 })
-export class MovieComponent implements OnInit {
+export class MovieListComponent implements OnInit {
   private movieService = inject(MovieService);
   private errorService = inject(ErrorService);
   private destroyRef = inject(DestroyRef);
@@ -40,4 +48,6 @@ export class MovieComponent implements OnInit {
       subscrption.unsubscribe();
     });
   }
+
+  
 }

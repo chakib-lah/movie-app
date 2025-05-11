@@ -11,7 +11,13 @@
     <p>{{ "description" }}</p>
   </mat-card-content>
 
-  <mat-card-actions>
+  <mat-card-actions class="button-group">
+    <button mat-stroked-button color="primary" (click)="onEdit()">
+      Edit Movie
+    </button>
+    <button mat-stroked-button color="warn" (click)="onDeleteMovie()">
+      Delete
+    </button>
     <button mat-stroked-button color="primary" routerLink="/movies">
       ← Back to Movies
     </button>

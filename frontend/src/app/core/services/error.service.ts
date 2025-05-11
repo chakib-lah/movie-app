@@ -26,4 +26,11 @@ export class ErrorService {
       panelClass: ['warn-snackbar'], // optional styling
     });
   }
+
+  showSuccess(message: string): void {
+    this.snackBar.open(message, 'OK', {
+      duration: 3000,
+      panelClass: ['success-snackbar'],
+    });
+  }
 }

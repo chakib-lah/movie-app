@@ -1,5 +1,9 @@
-<h2>Movie List</h2>
-
+<div class="header-row">
+  <h2 class="movie-title">Movie List</h2>
+  <button mat-stroked-button color="primary" [routerLink]="['addMovie']">
+    Add Movie
+  </button>
+</div>
 @if (isFetching()) {
 <p class="fallback-text">Fetching movies...</p>
 } @else { @if (hasMovies()) {

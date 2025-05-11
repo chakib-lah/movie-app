@@ -5,3 +5,5 @@ export interface Movie {
   director: string;
   year: number;
 }
+
+export type NewMovie = Omit<Movie, '_id'>;
