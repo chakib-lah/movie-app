@@ -59,4 +59,13 @@ export class AuthService {
       { withCredentials: true }
     );
   }
+
+  getUserProfile() {
+    return this.http.get<{ email: string; _id: string }>(
+      `${environment.apiUrl}/auth/me`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
 }

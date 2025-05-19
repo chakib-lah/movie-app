@@ -1,0 +1,16 @@
+<mat-card class="profile-card">
+  <mat-card-title>User Profile</mat-card-title>
+
+  <mat-card-content>
+    <p><strong>Email:</strong> {{ user()?.email || "N/A" }}</p>
+    <p><strong>User ID:</strong> {{ user()?._id || "N/A" }}</p>
+    <p><strong>Token expires:</strong> {{ tokenExp() }}</p>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-stroked-button color="primary" (click)="goToMovies()">
+      ← Back to Movies
+    </button>
+    <button mat-raised-button color="warn" (click)="onLogout()">Logout</button>
+  </mat-card-actions>
+</mat-card>

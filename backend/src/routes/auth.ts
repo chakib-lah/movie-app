@@ -3,6 +3,7 @@ import { User } from "../models/user.model";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { loginSchema, registerSchema } from "../validators/user.validator";
+import { authenticate } from "../middleware/auth";
 
 const router = Router();
 const ACCESS_SECRET = process.env.ACCESS_SECRET || "fallbackAccessSecret";
@@ -91,6 +92,13 @@ router.post("/refresh", (req, res) => {
 router.post("/logout", (req, res) => {
   res.clearCookie("refreshToken");
   return res.json({ message: "Logged out" });
+});
+
+router.get("/me", authenticate, async (req, res) => {
+  const userId = (req as any).user.userId;
+  const user = await User.findById(userId).select("-password"); // hide password
+  if (!user) return res.status(404).json({ message: "User not found" });
+  res.json(user);
 });
 
 export default router;

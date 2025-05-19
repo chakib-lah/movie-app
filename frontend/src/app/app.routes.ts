@@ -20,6 +20,12 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./movies/movies.routes').then((m) => m.movieRoutes),
       },
+      {
+        path: 'profile',
+        canActivate: [authGuard],
+        loadComponent: () =>
+          import('./profile/profile.component').then((m) => m.ProfileComponent),
+      },
     ],
   },
   {
