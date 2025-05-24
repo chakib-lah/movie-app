@@ -1,0 +1,39 @@
+services:
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    build:
+      context: ../backend
+      dockerfile: ../Docker/backend.Dockerfile
+    container_name: backend
+    working_dir: /app
+    environment:
+      - PORT=3000
+      - ACCESS_SECRET=yourAccessSecretKey123
+      - REFRESH_SECRET=yourRefreshSecretKey456
+      - MONGO_URI=mongodb://mongo:27017/movie-app
+      - FRONT_URI=http://localhost:4200
+      - NODE_ENV=development
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongo
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: ../Docker/frontend.Dockerfile
+    container_name: frontend
+    ports:
+      - '4200:80'
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:
