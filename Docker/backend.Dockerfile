@@ -1,21 +1,24 @@
-# 1. Use the official Node.js image as a base
-FROM node:20-alpine
+# 1. Base image
+FROM node:22-alpine
 
-# 2. Set the working directory in the container
+# 2. Set working directory
 WORKDIR /app
 
 # 3. Copy package files and install dependencies
 COPY package*.json ./
 RUN npm install
 
-# 4. Copy the rest of the source code into the container
+# 4. Copy source code
 COPY . .
 
-# 5. Expose the port your app runs on
+# 5. Compile TypeScript to JavaScript
+RUN npm run build
+
+# 6. Expose backend port
 EXPOSE 3000
 
-# 6. Set environment variables (can also be used in docker-compose)
+# 7. Set environment
 ENV NODE_ENV=production
 
-# 7. Start the server
-CMD ["npm", "start"]
+# 8. Start app
+CMD ["node", "dist/app.js"]
