@@ -13,13 +13,8 @@ services:
       dockerfile: ../Docker/backend.Dockerfile
     container_name: backend
     working_dir: /app
-    environment:
-      - PORT=3000
-      - ACCESS_SECRET=yourAccessSecretKey123
-      - REFRESH_SECRET=yourRefreshSecretKey456
-      - MONGO_URI=mongodb://mongo:27017/movie-app
-      - FRONT_URI=http://localhost:4200
-      - NODE_ENV=development
+    env_file:
+      - ../backend/.env
     ports:
       - '3000:3000'
     depends_on:
