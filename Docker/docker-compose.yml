@@ -23,7 +23,7 @@ services:
   frontend:
     build:
       context: ../frontend
-      dockerfile: ../Docker/frontend.Dockerfile
+      dockerfile: ../frontend/Dockerfile
     container_name: frontend
     ports:
       - '4200:80'
