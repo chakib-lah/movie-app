@@ -27,7 +27,7 @@ export class MovieFormComponent implements OnInit{
   movie = input<Movie | null>(null);
   submitLabel = input<string>('Save');
   submitForm = output<Movie>();
-  cancel = output<void>();
+  cancelForm = output<void>();
 
   isLoading = signal(false);
   errorMessage = signal<string | null>(null);
@@ -59,7 +59,7 @@ export class MovieFormComponent implements OnInit{
   }
 
   onCancel() {
-    this.cancel.emit();
+    this.cancelForm.emit();
   }
 
   getErrorMessage(controlName: 'title' | 'director' | 'year'): string {

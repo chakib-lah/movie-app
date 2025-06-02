@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { MovieFormComponent } from '../movie-form/movie-form.component';
 import { Movie } from '../movie.model';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -28,7 +28,7 @@ export class EditMovieComponent implements OnInit {
 
     this.movieService.getMovieById(id).subscribe({
       next: (movie) => this.movie.set(movie),
-      error: (err) => {
+      error: () => {
         this.errorService.showError('Failed to load movie');
         this.router.navigate(['/movies']);
       },
@@ -45,7 +45,7 @@ export class EditMovieComponent implements OnInit {
         this.errorService.showSuccess('Movie updated');
         this.router.navigate(['/movies']);
       },
-      error: (err) => {
+      error: () => {
         this.errorService.showError('Failed to update movie');
       },
     });

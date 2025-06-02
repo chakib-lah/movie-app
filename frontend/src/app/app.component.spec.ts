@@ -35,8 +35,12 @@ describe('AppComponent', () => {
           provide: ErrorService,
           useValue: {
             error: signal<string | null>(null),
-            showError: () => {},
-            clearError: () => {},
+            showError: (msg: string) => {
+              console.warn('Mock showError called with:', msg);
+            },
+            clearError: () => {
+              console.info('Mock clearError called');
+            },
           },
         },
       ],

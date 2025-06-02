@@ -1,6 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { MovieService } from './movie.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { ErrorService } from '../core/services/error.service';
 import { Movie, NewMovie } from './movie.model';
 import { environment } from '../../environments/environment';
@@ -16,15 +19,14 @@ describe('MovieService', () => {
 
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [
-        MovieService,
-        { provide: ErrorService, useValue: errorSpy }
-      ]
+      providers: [MovieService, { provide: ErrorService, useValue: errorSpy }],
     });
 
     service = TestBed.inject(MovieService);
     httpMock = TestBed.inject(HttpTestingController);
-    errorServiceSpy = TestBed.inject(ErrorService) as jasmine.SpyObj<ErrorService>;
+    errorServiceSpy = TestBed.inject(
+      ErrorService
+    ) as jasmine.SpyObj<ErrorService>;
   });
 
   afterEach(() => {
@@ -32,10 +34,10 @@ describe('MovieService', () => {
   });
 
   it('should fetch all movies and map _id to id', () => {
-    const mockMovies = [
-      { _id: '1', title: 'Movie 1' },
-      { _id: '2', title: 'Movie 2' }
-    ] as any;
+    const mockMovies: (Omit<Movie, 'id'> & { id: string })[] = [
+      { _id: '1', id: '1', title: 'Movie 1', director: 'X', year: 2020 },
+      { _id: '2', id: '2', title: 'Movie 2', director: 'Y', year: 2021 },
+    ];
 
     service.getAllMovies().subscribe((movies) => {
       expect(movies.length).toBe(2);
@@ -74,7 +76,12 @@ describe('MovieService', () => {
   });
 
   it('should update a movie', () => {
-    const updatedMovie: Movie = { _id: '1', title: 'Updated', director: '', year: 2021 };
+    const updatedMovie: Movie = {
+      _id: '1',
+      title: 'Updated',
+      director: '',
+      year: 2021,
+    };
 
     service.updateMovie(updatedMovie).subscribe((response) => {
       expect(response).toBeTruthy();
@@ -101,8 +108,10 @@ describe('MovieService', () => {
     service.getAllMovies().subscribe({
       next: () => fail('should fail'),
       error: () => {
-        expect(errorServiceSpy.showError).toHaveBeenCalledWith('Failed to fetch movies.');
-      }
+        expect(errorServiceSpy.showError).toHaveBeenCalledWith(
+          'Failed to fetch movies.'
+        );
+      },
     });
 
     const req = httpMock.expectOne(baseUrl);

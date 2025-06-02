@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { catchError, map, throwError } from 'rxjs';
 import { ErrorService } from '../core/services/error.service';
@@ -64,7 +64,7 @@ export class MovieService {
   }
 
   // Centralized error handler
-  private handleError(error: any, message: string) {
+  private handleError(error: HttpErrorResponse, message: string) {
     console.error(error);
     this.errorService.showError(message);
     return throwError(() => new Error(message));

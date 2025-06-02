@@ -4,6 +4,7 @@ import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
@@ -14,7 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ErrorService } from '../../core/services/error.service';
 
 function matchPasswords(controlName1: string, controlName2: string) {
-  return (group: AbstractControl): { [key: string]: any } | null => {
+  return (group: AbstractControl): ValidationErrors | null => {
     const control1 = group.get(controlName1);
     const control2 = group.get(controlName2);
 
