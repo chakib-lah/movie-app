@@ -1,7 +1,7 @@
-import { Router } from "express";
-import { Movie } from "../models/movie.model";
-import { authenticate } from "../middleware/auth";
-import { movieSchema } from "../validators/movie.validator";
+import { Router } from 'express';
+import { Movie } from '../models/movie.model';
+import { authenticate } from '../middleware/auth';
+import { movieSchema } from '../validators/movie.validator';
 
 const router = Router();
 
@@ -12,22 +12,22 @@ const router = Router();
 // ];
 
 // GET /api/movies -> List all movies
-router.get("/", authenticate, async (req, res) => {
+router.get('/', authenticate, async (req, res) => {
   const movies = await Movie.find();
   res.json(movies);
 });
 
 // GET /api/movies/:id -> Get one movie by ID
-router.get("/:movieId", authenticate, async (req, res) => {
+router.get('/:movieId', authenticate, async (req, res) => {
   const movieId = req.params.movieId;
   //   const movie = movies.find((m) => m.id === movieId);
   const movie = await Movie.findById(movieId);
-  if (!movie) return res.status(404).json({ message: "Movie not found" });
+  if (!movie) return res.status(404).json({ message: 'Movie not found' });
   res.json(movie);
 });
 
 // POST /api/movies -> Add a new movie
-router.post("/", authenticate, async (req, res, next) => {
+router.post('/', authenticate, async (req, res, next) => {
   try {
     const validated = movieSchema.parse(req.body);
     const newMovie = new Movie(validated);
@@ -42,13 +42,13 @@ router.post("/", authenticate, async (req, res, next) => {
 });
 
 // PUT /api/movies/:id -> Update a movie
-router.put("/:movieId", authenticate, async (req, res) => {
+router.put('/:movieId', authenticate, async (req, res) => {
   const movieId = req.params.movieId;
   //   const index = movies.findIndex((m) => m.id === movieId);
   const updated = await Movie.findByIdAndUpdate(movieId, req.body, {
     new: true,
   });
-  if (!updated) return res.status(404).json({ message: "Movie not found" });
+  if (!updated) return res.status(404).json({ message: 'Movie not found' });
   res.json(updated);
 
   //   if (index === -1) return res.status(404).json({ message: "Movie not found" });
@@ -58,10 +58,10 @@ router.put("/:movieId", authenticate, async (req, res) => {
 });
 
 // DELETE /api/movies/:id -> Delete a movie
-router.delete("/:movieId", authenticate, async (req, res) => {
+router.delete('/:movieId', authenticate, async (req, res) => {
   const movieId = req.params.movieId;
   const deleted = await Movie.findByIdAndDelete(movieId);
-  if (!deleted) return res.status(404).json({ message: "Movie not found" });
+  if (!deleted) return res.status(404).json({ message: 'Movie not found' });
   res.json(deleted);
 
   //   const index = movies.findIndex((m) => m.id === movieId);

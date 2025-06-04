@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const movieSchema = new mongoose.Schema(
   {
@@ -11,4 +11,4 @@ const movieSchema = new mongoose.Schema(
   }
 );
 
-export const Movie = mongoose.model("Movie", movieSchema);
+export const Movie = mongoose.model('Movie', movieSchema);

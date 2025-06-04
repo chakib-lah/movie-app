@@ -1,11 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
 import { ZodError } from 'zod';
 
+interface CustomError extends Error {
+  status?: number;
+  message: string;
+}
+
 export const errorHandler = (
-  err: any,
+  err: unknown,
   req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ) => {
   if (err instanceof ZodError) {
     return res.status(400).json({
@@ -18,11 +23,12 @@ export const errorHandler = (
     });
   }
 
-  // Custom handling for other known errors
-  if (err.status && err.message) {
-    return res.status(err.status).json({
+  const knownError = err as CustomError;
+
+  if (knownError.status && knownError.message) {
+    return res.status(knownError.status).json({
       status: 'fail',
-      message: err.message,
+      message: knownError.message,
     });
   }
 
