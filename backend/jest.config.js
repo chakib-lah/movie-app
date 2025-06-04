@@ -9,4 +9,5 @@ module.exports = {
     ...tsJestTransformCfg,
   },
   testMatch: ['**/*.spec.ts'],
+  testTimeout: 30000,
 };

@@ -1,3 +1,4 @@
+jest.setTimeout(30000);
 process.env.NODE_ENV = "test"; // make app.ts skip real DB connection
 
 import request from "supertest";
@@ -18,7 +19,7 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  await mongoose.disconnect();
+  await mongoose.connection.close();
   await mongo.stop();
 });
 

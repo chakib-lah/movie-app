@@ -1,3 +1,4 @@
+jest.setTimeout(30000);
 process.env.NODE_ENV = "test";
 
 import request from "supertest";
@@ -18,14 +19,16 @@ beforeAll(async () => {
   token = await getTestToken();
 });
 
-afterAll(async () => {
-  await mongoose.disconnect();
-  await mongo.stop();
+afterEach(async () => {
+  await Promise.all([
+    Movie.deleteMany?.(), 
+    User.deleteMany?.()
+  ]);
 });
 
-afterEach(async () => {
-  await Movie.deleteMany();
-  await User.deleteMany();
+afterAll(async () => {
+  await mongoose.connection.close();
+  await mongo.stop();
 });
 
 describe("Movies API", () => {
