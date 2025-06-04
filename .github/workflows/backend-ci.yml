@@ -32,6 +32,9 @@ jobs:
         run: npm run lint
 
       - name: Run tests
+        env:
+          NODE_ENV: test
+          MONGOMS_DOWNLOAD_URL: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.6.tgz
         run: npm run test
 
       - name: Build backend

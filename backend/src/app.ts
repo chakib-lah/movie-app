@@ -13,7 +13,8 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Connect to MongoDB
+// Skip DB connection if in test environment
+if (process.env.NODE_ENV !== "test") {
 mongoose
   .connect(process.env.MONGO_URI!)
   .then(() => {
@@ -25,6 +26,7 @@ mongoose
   .catch((err) => {
     console.error("❌ MongoDB connection error:", err);
   });
+}
 
 app.use(
   cors({
@@ -44,6 +46,7 @@ app.use("/api/movies", movieRoutes);
 // Catch errors from routes like login
 app.use(errorHandler);
 
+export default app;
 // app.listen(port, () => {
 //   console.log(`Server running on http://localhost:${port}`);
 // });
