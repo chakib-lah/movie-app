@@ -4,9 +4,9 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
-import movieRoutes from './routes/movies';
-import authRoutes from './routes/auth';
-import { errorHandler } from './middleware/error';
+import movieRoutes from './routes/movies.js';
+import authRoutes from './routes/auth.js';
+import { errorHandler } from './middleware/error.js';
 
 dotenv.config();
 

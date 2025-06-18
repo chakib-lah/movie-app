@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { Movie } from '../models/movie.model';
-import { authenticate } from '../middleware/auth';
-import { movieSchema } from '../validators/movie.validator';
+import { Movie } from '../models/movie.model.js';
+import { authenticate } from '../middleware/auth.js';
+import { movieSchema } from '../validators/movie.validator.js';
 
 const router = Router();
 
