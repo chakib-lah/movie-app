@@ -35,6 +35,8 @@ jobs:
         env:
           NODE_ENV: test
           MONGOMS_DOWNLOAD_URL: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.6.tgz
+          ACCESS_SECRET: ${{ secrets.ACCESS_SECRET }}
+          REFRESH_SECRET: ${{ secrets.REFRESH_SECRET }}
         run: npm run test:ci
 
       - name: Build backend
