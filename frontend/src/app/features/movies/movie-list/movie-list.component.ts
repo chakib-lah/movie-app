@@ -10,9 +10,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { RouterLink } from '@angular/router';
 
-import { MovieService } from '../movie.service';
-import { Movie } from '../movie.model';
-import { ErrorService } from '../../core/services/error.service';
+import { MovieService } from '@features/movies/services';
+import { Movie } from '@features/movies/models';
+import { ErrorService } from '@core/services/error.service';
 import { MatButton } from '@angular/material/button';
 
 @Component({

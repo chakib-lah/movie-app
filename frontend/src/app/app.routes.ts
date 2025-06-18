@@ -18,13 +18,13 @@ export const routes: Routes = [
         path: 'movies',
         canActivate: [authGuard],
         loadChildren: () =>
-          import('./movies/movies.routes').then((m) => m.movieRoutes),
+          import('./features/movies/movies.routes').then((m) => m.movieRoutes),
       },
       {
         path: 'profile',
         canActivate: [authGuard],
         loadComponent: () =>
-          import('./profile/profile.component').then((m) => m.ProfileComponent),
+          import('./features/profile/profile.component').then((m) => m.ProfileComponent),
       },
     ],
   },

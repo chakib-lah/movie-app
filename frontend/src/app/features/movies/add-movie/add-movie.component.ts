@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { MovieFormComponent } from '../movie-form/movie-form.component';
 import { Router } from '@angular/router';
-import { NewMovie } from '../movie.model';
-import { MovieService } from '../movie.service';
-import { ErrorService } from '../../core/services/error.service';
+import { MovieFormComponent } from '@features/movies/movie-form/movie-form.component';
+import { NewMovie } from '@features/movies/models';
+import { MovieService } from '@features/movies/services';
+import { ErrorService } from '@core/services/error.service';
 
 @Component({
   selector: 'app-add-movie',

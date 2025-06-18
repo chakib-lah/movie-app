@@ -1,5 +1,4 @@
 import { Component, inject, signal } from '@angular/core';
-import { AuthService } from '../../core/services/auth.service';
 import {
   FormControl,
   FormGroup,
@@ -11,7 +10,8 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ErrorService } from '../../core/services/error.service';
+import { AuthService } from '@core/services/auth.service';
+import { ErrorService } from '@core/services/error.service';
 
 @Component({
   selector: 'app-login',

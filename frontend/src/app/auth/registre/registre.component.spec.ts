@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RegistreComponent } from './registre.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from '../../core/services/auth.service';
-import { ErrorService } from '../../core/services/error.service';
 import { Router } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 import { of, throwError } from 'rxjs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { RegistreComponent } from './registre.component';
+import { AuthService } from '@core/services/auth.service';
+import { ErrorService } from '@core/services/error.service';
 
 describe('RegistreComponent', () => {
   let component: RegistreComponent;

@@ -7,12 +7,12 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { ErrorService } from '../../core/services/error.service';
+import { AuthService } from '@core/services/auth.service';
+import { ErrorService } from '@core/services/error.service';
 
 function matchPasswords(controlName1: string, controlName2: string) {
   return (group: AbstractControl): ValidationErrors | null => {

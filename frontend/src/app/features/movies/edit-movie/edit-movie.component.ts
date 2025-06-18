@@ -1,9 +1,9 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { MovieFormComponent } from '../movie-form/movie-form.component';
-import { Movie } from '../movie.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MovieService } from '../movie.service';
-import { ErrorService } from '../../core/services/error.service';
+import { MovieFormComponent } from '@features/movies/movie-form/movie-form.component';
+import { Movie } from '@features/movies/models';
+import { MovieService } from '@features/movies/services';
+import { ErrorService } from '@core/services/error.service';
 
 @Component({
   selector: 'app-edit-movie',

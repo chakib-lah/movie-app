@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { LoginComponent } from './login.component';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter } from '@angular/router';
-import { AuthService } from '../../core/services/auth.service';
-import { ErrorService } from '../../core/services/error.service';
 import { signal } from '@angular/core';
 import { of, throwError } from 'rxjs';
-import { MovieListComponent } from '../../movies/movie-list/movie-list.component';
+import { LoginComponent } from './login.component';
+import { AuthService } from '@core/services/auth.service';
+import { ErrorService } from '@core/services/error.service';
+import { MovieListComponent } from '@features/movies/movie-list/movie-list.component';
 
 
 describe('LoginComponent', () => {

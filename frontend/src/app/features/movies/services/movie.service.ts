@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import { catchError, map, throwError } from 'rxjs';
-import { ErrorService } from '../core/services/error.service';
-import { Movie, NewMovie } from './movie.model';
+import { environment } from '@env/environment';
+import { ErrorService } from '@core/services/error.service';
+import { Movie, NewMovie } from '@features/movies/models';
 
 @Injectable({ providedIn: 'root' })
 export class MovieService {

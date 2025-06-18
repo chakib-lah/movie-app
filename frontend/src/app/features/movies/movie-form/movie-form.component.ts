@@ -9,7 +9,7 @@ import { MatButton } from '@angular/material/button';
 import { MatFormField } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { Movie } from '../movie.model';
+import { Movie } from '@features/movies/models';
 
 @Component({
   selector: 'app-movie-form',

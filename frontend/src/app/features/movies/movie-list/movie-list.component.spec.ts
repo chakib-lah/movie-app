@@ -1,12 +1,13 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { MovieListComponent } from './movie-list.component';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter } from '@angular/router';
-import { MovieService } from '../movie.service';
-import { ErrorService } from '../../core/services/error.service';
-import { Movie } from '../movie.model';
 import { of, throwError } from 'rxjs';
 import { signal } from '@angular/core';
+
+import { MovieListComponent } from './movie-list.component';
+import { ErrorService } from '@core/services/error.service';
+import { MovieService } from '@features/movies/services';
+import { Movie } from '@features/movies/models';
 
 describe('MovieListComponent', () => {
   let component: MovieListComponent;

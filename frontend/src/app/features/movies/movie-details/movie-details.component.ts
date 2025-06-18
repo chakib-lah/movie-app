@@ -7,12 +7,12 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { map } from 'rxjs';
-import { MovieService } from '../movie.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
-import { Movie } from '../movie.model';
 import { MatButton } from '@angular/material/button';
-import { ErrorService } from '../../core/services/error.service';
+import { MovieService } from '@features/movies/services';
+import { Movie } from '@features/movies/models';
+import { ErrorService } from '@core/services/error.service';
 
 @Component({
   selector: 'app-movie-details',

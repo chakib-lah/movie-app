@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { MovieService } from './movie.service';
 import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { ErrorService } from '../core/services/error.service';
-import { Movie, NewMovie } from './movie.model';
-import { environment } from '../../environments/environment';
+import { MovieService } from './movie.service';
+import { ErrorService } from '@core/services/error.service';
+import { Movie, NewMovie } from '@features/movies/models';
+import { environment } from '@env/environment';
 
 describe('MovieService', () => {
   let service: MovieService;
