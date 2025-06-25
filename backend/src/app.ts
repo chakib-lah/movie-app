@@ -15,7 +15,6 @@ const port = process.env.PORT || 3000;
 
 // Skip DB connection if in test environment
 if (process.env.NODE_ENV !== 'test') {
-  console.log('🌍 MONGO_URI:', process.env.MONGO_URI);
 mongoose
   .connect(process.env.MONGO_URI!)
   .then(() => {
