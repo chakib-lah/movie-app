@@ -4,9 +4,9 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
-import movieRoutes from './routes/movies.js';
-import authRoutes from './routes/auth.js';
-import { errorHandler } from './middleware/error.js';
+import movieRoutes from './routes/movies';
+import authRoutes from './routes/auth';
+import { errorHandler } from './middleware/error';
 
 dotenv.config();
 
@@ -15,6 +15,7 @@ const port = process.env.PORT || 3000;
 
 // Skip DB connection if in test environment
 if (process.env.NODE_ENV !== 'test') {
+  console.log('🌍 MONGO_URI:', process.env.MONGO_URI);
 mongoose
   .connect(process.env.MONGO_URI!)
   .then(() => {

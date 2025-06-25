@@ -1,7 +1,7 @@
 import { Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { AuthenticatedRequest } from '../types/auth.js';
+import { AuthenticatedRequest } from '../types/auth';
 
 dotenv.config();
 

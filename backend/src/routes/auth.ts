@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { User } from '../models/user.model.js';
-import { loginSchema, registerSchema } from '../validators/user.validator.js';
-import { authenticate } from '../middleware/auth.js';
-import { AuthenticatedRequest } from '../types/auth.js';
-import { RefreshTokenRequest } from '../types/cookies.js';
+import { User } from '../models/user.model';
+import { loginSchema, registerSchema } from '../validators/user.validator';
+import { authenticate } from '../middleware/auth';
+import { AuthenticatedRequest } from '../types/auth';
+import { RefreshTokenRequest } from '../types/cookies';
 
 const router = Router();
 const ACCESS_SECRET = process.env.ACCESS_SECRET || 'fallbackAccessSecret';
